@@ -1,9 +1,9 @@
 import Data from "./components/Data";
-import "./App.css";
+import "./App.scss";
 
 function App() {
   return (
-    <div>
+    <div className="outer">
       <Data />
     </div>
   );

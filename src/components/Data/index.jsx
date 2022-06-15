@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 
 function Data() {
-  const [data, setData] = useState([]);
-  const [dataObj, setDataObj] = useState({});
+  const [rawData, setrawData] = useState([]);
+  const [data, setdata] = useState([]);
 
   const fetchData = () => {
     fetch(
@@ -12,7 +12,7 @@ function Data() {
       .then((res) => res.text())
       .then((data) =>
         // data received as plain text, convert into an array of integers, ignore last element of array since it's NaN
-        setData(() => {
+        setrawData(() => {
           return data
             .split("\n")
             .map((x) => {
@@ -24,23 +24,27 @@ function Data() {
   };
   useEffect(() => {
     // sort data from lower to highest
-    data.sort((a, b) => a - b);
+    rawData.sort((a, b) => a - b);
     // create an object to keep track of how many duplicates are in the data array
     const obj = {};
-    data.forEach((x) => {
+    rawData.forEach((x) => {
       if (obj[x]) {
         obj[x] += 1;
       } else {
         obj[x] = 1;
       }
     });
-    setDataObj(obj);
-  }, [data]);
-
-  console.log(dataObj);
+    // turn object into an array of individual objects
+    const result = Object.keys(obj).map((key) => ({
+      id: parseInt(key),
+      name: obj[key],
+    }));
+    setdata(result);
+  }, [rawData]);
+  console.log(data);
 
   return (
-    <div>
+    <div className={styles.outer}>
       <button onClick={fetchData}>Give Data</button>
       <div className={styles.axis}></div>
     </div>

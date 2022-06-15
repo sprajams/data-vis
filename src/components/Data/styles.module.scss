@@ -1,6 +1,13 @@
+.outer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .axis {
   border-left: 1px solid green;
   border-bottom: 1px solid green;
-  height: 300px;
-  width: 300px;
+  height: 500px;
+  width: 700px;
+  margin-top: 20px;
 }
