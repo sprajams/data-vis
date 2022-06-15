@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import styles from "./styles.module.scss";
 
 function Data() {
   const [data, setData] = useState([]);
@@ -41,6 +42,7 @@ function Data() {
   return (
     <div>
       <button onClick={fetchData}>Give Data</button>
+      <div className={styles.axis}></div>
     </div>
   );
 }
