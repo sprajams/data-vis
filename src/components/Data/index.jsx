@@ -5,7 +5,8 @@ function Data() {
   const [rawData, setrawData] = useState([]);
   const [data, setdata] = useState([]);
 
-  const fetchData = () => {
+  // fetch new data only on page load/refresh
+  useEffect(() => {
     fetch(
       "https://www.random.org/integers/?num=200&min=1&max=10&col=1&base=10&format=plain&rnd=new"
     )
@@ -21,7 +22,7 @@ function Data() {
             .slice(0, -1);
         })
       );
-  };
+  }, []);
   useEffect(() => {
     // sort data from lower to highest
     rawData.sort((a, b) => a - b);
@@ -37,7 +38,7 @@ function Data() {
     // turn object into an array of individual objects
     const result = Object.keys(obj).map((key) => ({
       id: parseInt(key),
-      name: obj[key],
+      value: obj[key],
     }));
     setdata(result);
   }, [rawData]);
@@ -45,8 +46,22 @@ function Data() {
 
   return (
     <div className={styles.outer}>
-      <button onClick={fetchData}>Give Data</button>
-      <div className={styles.axis}></div>
+      <div className={styles.axis}>
+        <div className={styles.axisY}>
+          <div>30</div>
+          <div>20</div>
+          <div>10</div>
+          <div>0</div>
+        </div>
+        {data.map((x) => {
+          return (
+            <div className={styles.bar} style={{ height: `${x.value * 15}px` }}>
+              <div>{x.value}</div>
+              <div className={styles.axisX}> {x.id} </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

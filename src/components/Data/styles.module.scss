@@ -5,9 +5,39 @@
   align-items: center;
 }
 .axis {
-  border-left: 1px solid green;
-  border-bottom: 1px solid green;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
   height: 500px;
   width: 700px;
   margin-top: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  position: relative;
+}
+.bar {
+  width: 50px;
+  background: rgb(201, 201, 201);
+  border-bottom: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+.axisX {
+  position: absolute;
+  bottom: -30px;
+}
+
+.axisY {
+  position: absolute;
+  left: -30px;
+  bottom: -10px;
+}
+
+.axisY > * {
+  margin-top: 130px;
+  height: 20px;
+  text-align: center;
 }
